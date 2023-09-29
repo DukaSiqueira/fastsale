@@ -7,13 +7,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.fast_sale.model.Cliente;
+import com.example.fast_sale.model.Produto;
 
 import java.util.ArrayList;
 
 public class CadastroPedidoActivity extends AppCompatActivity {
 
     private ArrayList<Cliente> listaClientes;
-    private Spinner spClientes;
+    private ArrayList<Produto> listaProdutos;
+    private Spinner spClientes, spProdutos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,9 @@ public class CadastroPedidoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_pedido);
 
         spClientes = findViewById(R.id.spClientes);
+        spProdutos = findViewById(R.id.spProdutos);
         getClientes();
+        getProdutos();
     }
 
     private void getClientes() {
@@ -38,5 +42,21 @@ public class CadastroPedidoActivity extends AppCompatActivity {
                 vetClientes);
 
         spClientes.setAdapter(adapter);
+    }
+
+    private void getProdutos() {
+        listaProdutos = DataManagerSingleton.getInstance().getListaProdutos();
+        String[]vetProdutos = new String[listaProdutos.size() + 1];
+        vetProdutos[0] = "Selecione o produto";
+        for (int i = 0; i < listaProdutos.size(); i++) {
+            Produto prod = listaProdutos.get(i);
+            vetProdutos[i+1] = prod.getDescProduto() + " - R$ " + prod.getValorProduto();
+        }
+        ArrayAdapter adapter = new ArrayAdapter(
+                CadastroPedidoActivity.this,
+                android.R.layout.simple_dropdown_item_1line,
+                vetProdutos);
+
+        spProdutos.setAdapter(adapter);
     }
 }
