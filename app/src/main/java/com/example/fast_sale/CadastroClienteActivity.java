@@ -65,8 +65,8 @@ public class CadastroClienteActivity extends AppCompatActivity {
         ArrayList<Cliente> lista = DataManagerSingleton.getInstance().getListaClientes();
         String texto = "";
         for (Cliente cli : lista) {
-            texto += "Nome:" + cli.getNome() + "\n" +
-                    "CPF:" + cli.getCpf() + "\n" +
+            texto += "Nome: " + cli.getNome() + "\n" +
+                    "CPF: " + cli.getCpf() + "\n" +
                     "---------------------------------------------\n";
         }
         tvListaClientes.setText(texto);

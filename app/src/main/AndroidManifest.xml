@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Fastsale"
         tools:targetApi="31">
         <activity
+            android:name=".CadastroProdutoActivity"
+            android:exported="false" />
+        <activity
             android:name=".CadastroClienteActivity"
             android:exported="false" />
         <activity
@@ -24,7 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
