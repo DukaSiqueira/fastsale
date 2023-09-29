@@ -9,6 +9,15 @@
     android:padding="15dp">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="O Produto deve ser selecionado!"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_gravity="right"
+        android:id="@+id/tvErroProduto"
+        android:visibility="gone"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -38,11 +47,11 @@
         android:textSize="18dp"
         android:layout_marginTop="15dp"/>
 
-    <AutoCompleteTextView
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/acProdutos"
+        android:id="@+id/spProdutos"
         android:hint="Selecione o produto"/>
 
     <TextView
@@ -60,6 +69,21 @@
         android:layout_marginTop="10dp"
         android:id="@+id/edQuantidadeProduto"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valor Unitário:"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Informe o valor unitário do produto"
+        android:inputType="number"
+        android:layout_marginTop="10dp"
+        android:id="@+id/edValorProduto"/>
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,5 +91,24 @@
         android:src="@drawable/ic_save"
         android:layout_gravity="right"
         android:id="@+id/btAddProduto"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Produtos"
+        android:textSize="18dp"
+        android:layout_marginTop="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvListaProdutos"
+        android:layout_marginBottom="15dp" />
 
 </LinearLayout>
