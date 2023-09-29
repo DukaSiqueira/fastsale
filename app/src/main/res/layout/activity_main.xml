@@ -35,4 +35,13 @@
         android:text="Cadastrar Produto"
         android:id="@+id/btCadastarProduto"/>
 
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="18dp"
+        android:text="Cadastrar Pedido"
+        android:id="@+id/btCadastarPedido"/>
+
 </LinearLayout>

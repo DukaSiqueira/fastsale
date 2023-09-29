@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btCadastrarCliente, btCadastrarProduto;
+    private Button btCadastrarCliente, btCadastrarProduto, btCadastarPedido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         btCadastrarCliente = findViewById(R.id.btCadastarCliente);
         btCadastrarProduto = findViewById(R.id.btCadastarProduto);
+        btCadastarPedido = findViewById(R.id.btCadastarPedido);
 
         btCadastrarCliente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         btCadastrarProduto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { abrirCadastroProduto(); }
+        });
+        btCadastarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { abrirCadastroPedido(); }
         });
     }
 
@@ -36,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void abrirCadastroProduto() {
         Intent intent = new Intent(this, CadastroProdutoActivity.class);
+        startActivity(intent);
+    }
+
+    private void abrirCadastroPedido() {
+        Intent intent = new Intent(this, CadastroPedidoActivity.class);
         startActivity(intent);
     }
 }
