@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.fast_sale.model.Cliente;
@@ -15,15 +17,16 @@ public class CadastroPedidoActivity extends AppCompatActivity {
 
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Produto> listaProdutos;
-    private Spinner spClientes, spProdutos;
+    private AutoCompleteTextView acProdutos, acClientes;
+    private ImageButton btAddProduto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_pedido);
 
-        spClientes = findViewById(R.id.spClientes);
-        spProdutos = findViewById(R.id.spProdutos);
+        acClientes = findViewById(R.id.acClientes);
+        acProdutos = findViewById(R.id.acProdutos);
         getClientes();
         getProdutos();
     }
@@ -31,7 +34,6 @@ public class CadastroPedidoActivity extends AppCompatActivity {
     private void getClientes() {
         listaClientes = DataManagerSingleton.getInstance().getListaClientes();
         String[]vetClientes = new String[listaClientes.size() + 1];
-        vetClientes[0] = "Selecione o cliente";
         for (int i = 0; i < listaClientes.size(); i++) {
             Cliente cliente = listaClientes.get(i);
             vetClientes[i+1] = cliente.getNome();
@@ -41,13 +43,12 @@ public class CadastroPedidoActivity extends AppCompatActivity {
                 android.R.layout.simple_dropdown_item_1line,
                 vetClientes);
 
-        spClientes.setAdapter(adapter);
+        acClientes.setAdapter(adapter);
     }
 
     private void getProdutos() {
         listaProdutos = DataManagerSingleton.getInstance().getListaProdutos();
         String[]vetProdutos = new String[listaProdutos.size() + 1];
-        vetProdutos[0] = "Selecione o produto";
         for (int i = 0; i < listaProdutos.size(); i++) {
             Produto prod = listaProdutos.get(i);
             vetProdutos[i+1] = prod.getDescProduto() + " - R$ " + prod.getValorProduto();
@@ -57,6 +58,6 @@ public class CadastroPedidoActivity extends AppCompatActivity {
                 android.R.layout.simple_dropdown_item_1line,
                 vetProdutos);
 
-        spProdutos.setAdapter(adapter);
+        acProdutos.setAdapter(adapter);
     }
 }

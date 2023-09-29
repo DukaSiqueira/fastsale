@@ -20,15 +20,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Código:"
+        android:text="Cliente:"
         android:textSize="18dp"
         android:layout_marginTop="15dp"/>
 
-    <Spinner
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/spClientes"/>
+        android:id="@+id/acClientes"
+        android:hint="Selecione o cliente"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -37,11 +38,12 @@
         android:textSize="18dp"
         android:layout_marginTop="15dp"/>
 
-    <Spinner
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/spProdutos"/>
+        android:id="@+id/acProdutos"
+        android:hint="Selecione o produto"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -64,6 +66,6 @@
         android:background="@drawable/circle_button"
         android:src="@drawable/ic_save"
         android:layout_gravity="right"
-        android:id="@+id/btAddMateria"/>
+        android:id="@+id/btAddProduto"/>
 
 </LinearLayout>
