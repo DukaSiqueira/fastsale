@@ -52,7 +52,8 @@ public class CadastroProdutoActivity extends AppCompatActivity {
             return;
         }
 
-        if (edValorProduto.getText().toString().isEmpty()) {
+        if (edValorProduto.getText().toString().isEmpty() ||
+            Double.parseDouble(edValorProduto.getText().toString()) <= 0.0) {
             edValorProduto.setError("Informe o valor do produto!");
             edValorProduto.requestFocus();
             return;
