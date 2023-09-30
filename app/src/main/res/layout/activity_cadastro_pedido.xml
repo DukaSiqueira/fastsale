@@ -194,6 +194,13 @@
                 android:textSize="18dp"
                 android:text="Salvar"
                 android:id="@+id/btSalvarPedido"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvListaPedidos"
+                android:textSize="18dp"
+                android:layout_marginTop="10dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

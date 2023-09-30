@@ -30,7 +30,7 @@
         private Spinner spProdutos;
         private ImageButton btAddProduto;
         private TextView tvListaProdutos, tvErroProduto, tvTotalQtdProdutos, tvTotalValorProdutos,
-            tvValorTotal, tvRadioGroupError;
+            tvValorTotal, tvRadioGroupError, tvListPedidos;
         private EditText edQuantidadeProduto, edValorProduto, edQuantidadeParcelas;
         private int posicaoSelecionada = 0;
         private String texto = "";
@@ -64,8 +64,10 @@
             btSalvarPedido = findViewById(R.id.btSalvarPedido);
             rbAPrazo  = findViewById(R.id.rbAPrazo);
             tvRadioGroupError = findViewById(R.id.tvRadioGroupError);
+            tvListPedidos = findViewById(R.id.tvListaPedidos);
             getClientes();
             getProdutos();
+            atualizarListaProduto();
 
             acClientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -189,6 +191,7 @@
             produtosSelecionados += Integer.parseInt(edQuantidadeProduto.getText().toString());
             totalProdutosSelecionados += Double.parseDouble(edValorProduto.getText().toString())
                 * Integer.parseInt(edQuantidadeProduto.getText().toString());
+            totalProdutosSelecionadosAux = totalProdutosSelecionados;
             tvTotalQtdProdutos.setText("Total Produtos: " + produtosSelecionados);
             tvTotalValorProdutos.setText("Total: R$ " + totalProdutosSelecionados);
             spProdutos.setSelection(0);
@@ -198,15 +201,14 @@
         }
 
         private void calcularAVista() {
+            totalProdutosSelecionados = totalProdutosSelecionadosAux;
             Double desconto = totalProdutosSelecionados * 0.05;
             totalProdutosSelecionados = totalProdutosSelecionados - desconto;
             tvValorTotal.setText("Valor total: " + totalProdutosSelecionados + "\n" +
                     "Desconto: " + desconto);
-            totalProdutosSelecionadosAux = totalProdutosSelecionados;
         }
         private void calcularAPrazo() {
-            System.out.println(totalProdutosSelecionados);
-            System.out.println(totalProdutosSelecionadosAux);
+            totalProdutosSelecionados = totalProdutosSelecionadosAux;
             Double acrescimo = 5.0 / 100.0 * totalProdutosSelecionados;
             totalProdutosSelecionados = totalProdutosSelecionados + acrescimo;
             Double totalParcela = totalProdutosSelecionados
@@ -215,6 +217,7 @@
                     "Valor parcela: " + totalParcela + "\n" +
                     "Acréscimo: " + acrescimo + "\n" +
                     "Qtd parcelas:" + edQuantidadeParcelas.getText().toString());
+            edQuantidadeParcelas.setText("");
         }
 
         private void salvarPedido() {
@@ -246,8 +249,10 @@
             Pedido pedido = new Pedido();
             pedido.setCliente(clienteSelecionado);
             pedido.setListaProdutos(listaProdutosSelecionados);
-            pedido.setValorTotal(totalProdutosSelecionadosAux);
+            pedido.setValorTotal(totalProdutosSelecionados);
             pedido.setTotalProdutos(produtosSelecionados);
+
+            DataManagerSingleton.getInstance().salvarPedido(pedido);
 
             Toast.makeText(this, "Pedido salvo com sucesso!", Toast.LENGTH_LONG).show();
 
