@@ -133,7 +133,7 @@
         private void getClientes() {
             listaClientes = DataManagerSingleton.getInstance().getListaClientes();
             String[]vetClientes = new String[listaClientes.size() + 1];
-            vetClientes[0] = "Selecione o produto";
+            vetClientes[0] = "Selecione o cliente";
             for (int i = 0; i < listaClientes.size(); i++) {
                 Cliente cliente = listaClientes.get(i);
                 vetClientes[i+1] = cliente.getNome();
