@@ -41,6 +41,7 @@
         private RadioButton rbAPrazo;
         private Button btSalvarPedido;
         private Cliente clienteSelecionado;
+        private int numParcelas;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +85,12 @@
             spProdutos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    // Ao selecionar o produto atribui seu index da listagem a variável
                     if(i > 0){
                         posicaoSelecionada = i;
                         tvErroProduto.setVisibility(View.GONE);
                     }
+                    // Ao selecionar o produto atribui seu valor automaticamente
                     if (l >  0 && listaProdutos.size() > 0) {
                         edValorProduto.setText(Double.toString(listaProdutos.get(i - 1).getValorProduto()));
                     }
@@ -173,7 +176,7 @@
                 return;
             }
 
-            if (edValorProduto.getText().toString().isEmpty() &&
+            if (edValorProduto.getText().toString().isEmpty() ||
                 Double.parseDouble(edValorProduto.getText().toString()) <= 0) {
                 edValorProduto.setError("Valor do produto deve ser informado!");
                 edValorProduto.requestFocus();
@@ -192,22 +195,26 @@
             totalProdutosSelecionados += Double.parseDouble(edValorProduto.getText().toString())
                 * Integer.parseInt(edQuantidadeProduto.getText().toString());
             totalProdutosSelecionadosAux = totalProdutosSelecionados;
-            tvTotalQtdProdutos.setText("Total Produtos: " + produtosSelecionados);
+            tvTotalQtdProdutos.setText("Qtd Produtos: " + produtosSelecionados);
             tvTotalValorProdutos.setText("Total: R$ " + totalProdutosSelecionados);
-            spProdutos.setSelection(0);
-            posicaoSelecionada = 0;
-            edQuantidadeProduto.setText("");
-            edValorProduto.setText("");
+            limparCampos();
         }
 
         private void calcularAVista() {
             totalProdutosSelecionados = totalProdutosSelecionadosAux;
-            Double desconto = totalProdutosSelecionados * 0.05;
+            Double desconto = (double)totalProdutosSelecionados * 0.05;
             totalProdutosSelecionados = totalProdutosSelecionados - desconto;
             tvValorTotal.setText("Valor total: " + totalProdutosSelecionados + "\n" +
                     "Desconto: " + desconto);
         }
         private void calcularAPrazo() {
+            if (edQuantidadeParcelas.getText().toString().isEmpty() ||
+                Integer.parseInt(edQuantidadeParcelas.getText().toString()) <= 0) {
+                edQuantidadeParcelas.setError("Informe a quantidade de parcelas");
+                edQuantidadeParcelas.requestFocus();
+                return;
+            }
+            numParcelas = Integer.parseInt(edQuantidadeParcelas.getText().toString());
             totalProdutosSelecionados = totalProdutosSelecionadosAux;
             Double acrescimo = 5.0 / 100.0 * totalProdutosSelecionados;
             totalProdutosSelecionados = totalProdutosSelecionados + acrescimo;
@@ -216,7 +223,7 @@
             tvValorTotal.setText("Valor total: " + totalProdutosSelecionados + "\n" +
                     "Valor parcela: " + totalParcela + "\n" +
                     "Acréscimo: " + acrescimo + "\n" +
-                    "Qtd parcelas:" + edQuantidadeParcelas.getText().toString());
+                    "Qtd parcelas: " + edQuantidadeParcelas.getText().toString());
             edQuantidadeParcelas.setText("");
         }
 
@@ -238,8 +245,7 @@
             }
 
             if (rbAPrazo.isChecked()) {
-                if (edQuantidadeParcelas.getText().toString().isEmpty()
-                    || Integer.parseInt(edQuantidadeParcelas.getText().toString()) <= 0) {
+                if (numParcelas <= 0) {
                     edQuantidadeParcelas.setError("Informe a quantidade de parcelas!");
                     edQuantidadeParcelas.requestFocus();
                     return;
@@ -268,10 +274,16 @@
                     "CPF: " + pedido.getCliente().getCpf() + "\n" +
                     "Valor Total: " + pedido.getValorTotal() + "\n" +
                     "Total Produtos: " + pedido.getTotalProdutos() + "\n" +
-                    "Lista Produtos" + pedido.getListaProdutos().toString() + "\n" +
-                        "---------------------------------------------\n";
+                    "Lista Produtos" + pedido.getListaProdutos().toString() + "\n";
             }
             tvListaPedidos.setText(texto);
+        }
+
+        private void limparCampos() {
+            spProdutos.setSelection(0);
+            posicaoSelecionada = 0;
+            edQuantidadeProduto.setText("");
+            edValorProduto.setText("");
         }
 
     }
