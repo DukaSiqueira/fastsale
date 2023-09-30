@@ -30,7 +30,7 @@
         private Spinner spProdutos;
         private ImageButton btAddProduto;
         private TextView tvListaProdutos, tvErroProduto, tvTotalQtdProdutos, tvTotalValorProdutos,
-            tvValorTotal, tvRadioGroupError, tvListPedidos;
+            tvValorTotal, tvRadioGroupError, tvListaPedidos;
         private EditText edQuantidadeProduto, edValorProduto, edQuantidadeParcelas;
         private int posicaoSelecionada = 0;
         private String texto = "";
@@ -64,7 +64,7 @@
             btSalvarPedido = findViewById(R.id.btSalvarPedido);
             rbAPrazo  = findViewById(R.id.rbAPrazo);
             tvRadioGroupError = findViewById(R.id.tvRadioGroupError);
-            tvListPedidos = findViewById(R.id.tvListaPedidos);
+            tvListaPedidos = findViewById(R.id.tvListaPedidos);
             getClientes();
             getProdutos();
             atualizarListaProduto();
@@ -271,7 +271,7 @@
                     "Lista Produtos" + pedido.getListaProdutos().toString() + "\n" +
                         "---------------------------------------------\n";
             }
-            tvListaProdutos.setText(texto);
+            tvListaPedidos.setText(texto);
         }
 
     }
